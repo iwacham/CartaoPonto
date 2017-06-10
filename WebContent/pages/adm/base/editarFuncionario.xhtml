@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"> 
+
+<head>
+
+<title>CartãoPonto - Cadastro de Funcionários</title>
+<link rel="shortcut icon" href="/img/icon.png" />
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous" />
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="../../../js/custom.js"></script>
+
+<style>
+
+.conteudoPrincipal {
+	background-color: #FFFFFF;
+	margin: auto;
+	width: 60%;
+	border: 2px solid #fcfcfc;
+	border-radius: 10px;
+	margin-top: 30px;
+	padding: 10px;
+}
+
+.myinput {
+	font-size: 18px;
+	width: 100%;
+	padding: 12px 20px;
+	margin: 8px 0;
+	display: inline-block;
+	border: 1px solid #ccc;
+	box-sizing: border-box;
+}
+
+table {
+	width: 100%;
+	border-radius: 5px;
+}
+
+table td {
+	font-size: 14px;
+	text-align: right;
+	padding-left: 10px;
+}
+
+</style>
+
+</head> 
+<body> 
+
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+		<div class="container">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+
+				</button>
+				<a class="navbar-brand" href="#">CartãoPonto</a>
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+				<li><a href="/CartaoPontoOpet/pages/adm/index.xhtml">Principal</a></li>
+				<li><a href="/CartaoPontoOpet/pages/adm/base/listarFuncionarios.xhtml">Listar Funcionários</a></li>
+				<li><a href="/CartaoPontoOpet/pages/adm/base/cadastrarFuncionario.xhtml">Cadastrar
+						Funcionário</a></li>				
+				</ul>
+				
+
+				
+			</div><!-- /.navbar-collapse -->
+		</div><!-- /.container-fluid -->
+	</nav>
+    
+    <div class="container">
+    	<div class="row">
+    		<div class="alert alert-info">
+                <strong>Alerts Dont Work on Bootsnipp!</strong> So when you hit enter or submit this form your result will show up in the green box below!
+            </div>
+            
+            <div class="conteudoPrincipal">
+		<table>
+
+			<h:form>
+				<tr>
+					<td>CPF:</td>
+					<td><h:inputText styleClass="cpf myinput" id="cpf" name="cpf"
+							required="true" value="#{fBean.func.cpf}" maxlength="11" /></td>
+				</tr>
+
+				<tr>
+					<td>Nome:</td>
+					<td><h:inputText styleClass="myinput" id="nome" required="true"
+							value="#{fBean.func.nome}" /></td>
+				</tr>
+
+				<tr>
+					<td>Data Nascimento:</td>
+					<td><h:inputText id="data" name="data" styleClass="data myinput"
+							required="true" value="#{fBean.func.dtNasc}">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:inputText></td>
+				</tr>
+
+				<tr>
+					<td>Telefone:</td>
+					<td><h:inputText styleClass="myinput telefone" id="telefone" required="true"
+							value="#{fBean.func.telefone}" maxlength="9" onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false;" /></td>
+				</tr>
+
+				<tr>
+					<td>Cargo:</td>
+					<td><h:selectOneMenu class="myinput"
+							value="#{fBean.func.cargo}" id="cargo">
+							<f:selectItem itemValue="RH" itemLabel="RH" />
+							<f:selectItem itemValue="Administração" itemLabel="Administração" />
+							<f:selectItem itemValue="Contabilidade" itemLabel="Contabilidade" />
+							<f:selectItem itemValue="Estagiário" itemLabel="Estagiário" />
+						</h:selectOneMenu></td>
+				</tr>
+
+				<tr>
+					<td>Nome de Usuário:</td>
+					<td><h:inputText class="myinput" id="nomeUsuario"
+							required="true" value="#{fBean.func.nomeUsuario}" /></td>
+				</tr>
+				
+
+				<tr>
+					<td></td>
+					<td><h:commandButton class="btn btn-primary"
+							action="#{fBean.alterarCadastroFuncionario()}" value="SALVAR" /></td>
+				</tr>
+
+
+			</h:form>
+
+
+
+		</table>
+	</div>
+    </div>
+    </div>
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script
+		src="http://digitalbush.com/wp-content/uploads/2014/10/jquery.maskedinput.js"></script>
+<script>
+        jQuery(function($){
+           $("input.data").mask("99/99/9999");
+           $("input.cpf").mask("999.999.999-99");
+           $("#ssn").mask("999-99-9999");
+       });
+    </script>
+</body> 
+</html>

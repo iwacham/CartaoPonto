@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<head>
+
+<link href="../css/custom.css" rel="stylesheet" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous" />
+
+<!-- Optional theme -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+	crossorigin="anonymous" />
+
+<!-- Latest compiled and minified JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+	crossorigin="anonymous"></script>
+
+<style>
+.centroDiv {
+	position: relative;
+	width: 50%;
+	margin: auto;
+	padding: 10px;
+}
+</style>
+</head>
+<body>
+	<header> <nav class="navbar navbar-default navbar-fixed-top"
+		role="navigation">
+	<div class="container">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse"
+				data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+
+			</button>
+			<a class="navbar-brand" href="#">CartãoPonto</a>
+		</div>
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse"
+			id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li><a href="/CartaoPontoOpet/index.xhtml">Principal</a></li>
+			</ul>
+
+
+
+		</div>
+		<!-- /.navbar-collapse -->
+	</div>
+	<!-- /.container-fluid --> </nav> </header>
+	<br />
+	<hr />
+	<br />
+
+
+	<c:if test="#{param['status'] eq 'OK'}">
+		<div class="alert alert-success centroDiv">
+			<center>
+				<strong>Sucesso!</strong>
+				<h:outputText value="#{param['msg']}" />
+			</center>
+		</div>
+	</c:if>
+
+	<c:if test="#{param['status'] eq 'BAD'}">
+		<div class="alert alert-danger centroDiv">
+			<center>
+				<strong>Erro!</strong>
+				<h:outputText value="#{param['msg']}" />
+			</center>
+		</div>
+	</c:if>
+	<div class="centroDiv">
+		<a href="/CartaoPontoOpet/index.xhtml" class="btn btn-primary">VOLTAR</a>
+	</div>
+</body>
+</html>
