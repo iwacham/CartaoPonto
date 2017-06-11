@@ -38,7 +38,7 @@ public class BaterPontoController implements IAbstractDAO<BaterPonto> {
 		Connection conn = null;
 		boolean resultado = false;
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-
+		Date dt = new Date();
 		try {
 			conn = db.getConnection();
 			System.out.println("NOME: " + entidade.getNmUsuario());
@@ -50,7 +50,7 @@ public class BaterPontoController implements IAbstractDAO<BaterPonto> {
 				
 				switch (entidade.getAcaoFuncionario()) {
 				case "HORA_ENTRADA":
-					Date dt = new Date();
+					
 					PreparedStatement st = db.getPreparedStatement(conn,
 							"INSERT INTO TBL_TIMECARD (CPF, DATA_PONTO, HORA_ENTRADA, STATUS) VALUES (?, ?, ?, ?)");
 					st.setString(1, entidade.getNmUsuario());
@@ -66,17 +66,50 @@ public class BaterPontoController implements IAbstractDAO<BaterPonto> {
 					break;
 
 				case "HORA_SAIDA_INTERVALO":
-					
+					st = db.getPreparedStatement(conn,
+							"UPDATE TBL_TIMECARD SET HORA_SAIDA_INTERVALO = ? WHERE CPF = ? AND DATA_PONTO = ?");
+					st.setTimestamp(1, new java.sql.Timestamp(dt.getTime()));
+					st.setString(2, entidade.getNmUsuario());
+					st.setString(3, sdf.format(dt));
+
+					if (st.executeUpdate() != 0) {
+						resultado = true;
+					} else {
+						resultado = false;
+					}
+
 					
 					break;
 
 				case "HORA_RETORNO_INTERVALO":
-					
+					st = db.getPreparedStatement(conn,
+							"UPDATE TBL_TIMECARD SET HORA_RETORNO_INTERVALO = ? WHERE CPF = ? AND DATA_PONTO = ?");
+					st.setTimestamp(1, new java.sql.Timestamp(dt.getTime()));
+					st.setString(2, entidade.getNmUsuario());
+					st.setString(3, sdf.format(dt));
+
+					if (st.executeUpdate() != 0) {
+						resultado = true;
+					} else {
+						resultado = false;
+					}
+
 
 					break;
 
 				case "HORA_SAIDA":
-					
+					st = db.getPreparedStatement(conn,
+							"UPDATE TBL_TIMECARD SET HORA_SAIDA = ? WHERE CPF = ? AND DATA_PONTO = ?");
+					st.setTimestamp(1, new java.sql.Timestamp(dt.getTime()));
+					st.setString(2, entidade.getNmUsuario());
+					st.setString(3, sdf.format(dt));
+
+					if (st.executeUpdate() != 0) {
+						resultado = true;
+					} else {
+						resultado = false;
+					}
+
 
 					break;
 					
@@ -87,14 +120,17 @@ public class BaterPontoController implements IAbstractDAO<BaterPonto> {
 				default:
 					break;
 				}
-				
-				
-				
-				
+	
 			} else {
 				resultado = false;
 			}
 		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} finally {
 			if (conn != null) {
