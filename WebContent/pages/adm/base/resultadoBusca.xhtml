@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<head>
+
+<title>CartãoPonto - Cadastro de Funcionários</title>
+<link rel="shortcut icon" href="/img/icon.png" />
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous" />
+
+<!-- Optional theme -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+	crossorigin="anonymous" />
+<!-- Latest compiled and minified JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+	crossorigin="anonymous"></script>
+<script src="../../../js/custom.js"></script>
+
+<style>
+.conteudoPrincipal {
+	background-color: #FFFFFF;
+	margin: auto;
+	width: 80%;
+	border: 2px solid #fcfcfc;
+	border-radius: 10px;
+	margin-top: 30px;
+	padding: 10px;
+}
+
+.myinput {
+	font-size: 18px;
+	width: 100%;
+	padding: 12px 20px;
+	margin: 8px 0;
+	display: inline-block;
+	border: 1px solid #ccc;
+	box-sizing: border-box;
+}
+
+table {
+	width: 100%;
+	border-radius: 5px;
+}
+
+table td {
+	font-size: 14px;
+	text-align: right;
+	padding-left: 10px;
+}
+
+table tr {
+	height: 50px;
+	border-bottom: 2px solid #3C3C3C;
+}
+
+table thead {
+	background-color: #F5F5F5;
+	border: 1px solid #F5F5F5;
+	border-radius: 5px;
+	text-align: center;
+}
+</style>
+
+</head>
+<body>
+
+	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse"
+				data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+
+			</button>
+			<a class="navbar-brand" href="/CartaoPontoOpet/">CartãoPonto</a>
+		</div>
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse"
+			id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li><a href="/CartaoPontoOpet/pages/adm/index.xhtml">Principal</a></li>
+				<li><a
+					href="/CartaoPontoOpet/pages/adm/base/listarFuncionarios.xhtml">Listar
+						Funcionários</a></li>
+				<li><a
+					href="/CartaoPontoOpet/pages/adm/base/cadastrarFuncionario.xhtml">Cadastrar
+						Funcionário</a></li>
+			</ul>
+
+			<div class="col-sm-3 col-md-3">
+				<h:form class="navbar-form" role="search">
+					<div class="input-group">
+						<h:inputText value="#{fBean.buscarFuncionario}" class="form-control" placeholder="Buscar Funcionário" name="busca"/>
+						<div class="input-group-btn">
+						<h:commandButton action="#{fBean.chamarPaginaBusca()}" class="btn btn-default" value="Buscar" />
+						
+						
+
+						</div>
+					</div>
+				</h:form>
+			</div>
+
+		</div>
+		<!-- /.navbar-collapse -->
+	</div>
+	<!-- /.container-fluid --> </nav>
+
+	<div class="container">
+		<div class="row">
+		<br />
+		<br />
+			<div class="conteudoPrincipal">
+				<table>
+					<thead>
+						<tr>
+							<td>NOME</td>
+							<td>CPF</td>
+							<td>NASCIMENTO</td>
+							<td>TELEFONE</td>
+							<td>CARGO</td>
+							<td></td>
+						</tr>
+
+					</thead>
+
+					<tbody>
+						<h:form>
+							<ui:repeat var="f" value="#{fBean.buscaFuncionario()}">
+
+								<tr>
+									<td><h:outputText value="#{f.nome}" /></td>
+									<td><h:outputText value="#{f.cpf}" /></td>
+									<td><h:outputText value="#{f.dtNasc}">
+											<f:convertDateTime pattern="dd/MM/yyyy" />
+										</h:outputText></td>
+
+									<td><h:outputText value="#{f.telefone}" /></td>
+									<td><h:outputText value="#{f.cargo}" /></td>
+
+									<td><h:commandButton styleClass="btn btn-warning"
+											action="#{fBean.chamarPaginaAlteracao(f)}" value="Editar" />||<h:commandButton
+											styleClass="btn btn-danger"
+											action="#{fBean.chamarPaginaExclusao(f)}" value="Excluir" /></td>
+								</tr>
+							</ui:repeat>
+						</h:form>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
