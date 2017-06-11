@@ -15,32 +15,68 @@ import br.opet.projeto.models.BaterPonto;
 public class BaterPontoBean {
 
 	private BaterPonto bp = new BaterPonto();
+
+	public String chamarPaginaContestar(BaterPonto f){
+		this.bp = f;
+		System.out.println("DATA DIA: " + bp.getDiaTrabalho());
+		return "contestarHorario";
+	}
 	
+	public void gravarHoraContestada(){
+		BaterPontoController bpc = new BaterPontoController();
+
+		if (bpc.gravarHorasContestadas(bp)) {
+
+			try {
+				FacesContext.getCurrentInstance().getExternalContext()
+						.redirect("/CartaoPontoOpet/pages/msg.xhtml?msg=Registro efetuado com sucesso!&status=OK");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		} else {
+
+			try {
+				FacesContext.getCurrentInstance().getExternalContext()
+						.redirect("/CartaoPontoOpet/pages/msg.xhtml?msg=Erro ao registrar!&status=BAD");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		// Fim do metodo
+		
+	}
+	
+	public List<BaterPonto> listarHorasContestadas() {
+		BaterPontoController bpc = new BaterPontoController();
+
+		return bpc.listarHorasContestadas();
+	}
+
 	/**
-	 * Metodo que busca o cpf no banco e retorna uma lista
-	 * com o ponto completo daquele funcionario
+	 * Metodo que busca o cpf no banco e retorna uma lista com o ponto completo
+	 * daquele funcionario
+	 * 
 	 * @return
 	 */
-	public List<BaterPonto> listarPontoFuncionario(){
+	public List<BaterPonto> listarPontoFuncionario() {
 		BaterPontoController bpc = new BaterPontoController();
-		for (BaterPonto bp : bpc.procurarPorChave(bp.getNmUsuario())) {
-			System.out.println("DATA: " + bp.getHoraEntrada());
-		}
-		
+
 		return bpc.procurarPorChave(bp.getNmUsuario());
 	}
 
 	/**
-	 * Metodo responsavel por toda a operacao do funcionario
-	 * executar login e bater o ponto
+	 * Metodo responsavel por toda a operacao do funcionario executar login e
+	 * bater o ponto
 	 */
 	public void baterPonto() {
 		// Inicio do metodo
 		System.out.println("User: " + bp.getNmUsuario());
 		BaterPontoController bpc = new BaterPontoController();
 		if (bpc.cadastrarNoBanco(bp)) {
-			
-			if(bp.getAcaoFuncionario().equals("ACESSO_SIMPLES")){
+
+			if (bp.getAcaoFuncionario().equals("ACESSO_SIMPLES")) {
 				try {
 					FacesContext.getCurrentInstance().getExternalContext()
 							.redirect("/CartaoPontoOpet/pages/usr/base/listarCartaoPonto.xhtml");

@@ -32,7 +32,7 @@
 .conteudoPrincipal {
 	background-color: #FFFFFF;
 	margin: auto;
-	width: 60%;
+	width: 80%;
 	border: 2px solid #fcfcfc;
 	border-radius: 10px;
 	margin-top: 30px;
@@ -59,6 +59,18 @@ table td {
 	text-align: right;
 	padding-left: 10px;
 }
+
+table tr {
+	height: 50px;
+	border-bottom: 2px solid #3C3C3C;
+}
+
+table thead {
+	background-color: #F5F5F5;
+	border: 1px solid #F5F5F5;
+	border-radius: 5px;
+	text-align: center;
+}
 </style>
 
 </head>
@@ -79,25 +91,15 @@ table td {
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav">
-				<li><a href="/CartaoPontoOpet/pages/adm/listarHorasContestadas.xhtml">Principal</a></li>
-				<li><a href="/CartaoPontoOpet/pages/adm/base/listarFuncionarios.xhtml">Listar Funcionários</a></li>
-				<li><a href="/CartaoPontoOpet/pages/adm/base/cadastrarFuncionario.xhtml">Cadastrar
-						Funcionário</a></li>					
-				</ul>
-			<div class="col-sm-3 col-md-3">
-				<h:form class="navbar-form" role="search">
-					<div class="input-group">
-						<h:inputText value="#{fBean.buscarFuncionario}" class="form-control" placeholder="Buscar Funcionário" name="busca"/>
-						<div class="input-group-btn">
-						<h:commandButton action="#{fBean.chamarPaginaBusca()}" class="btn btn-default" value="Buscar" />
-						
-						
+			<ul class="nav navbar-nav">
+				<li><a href="/CartaoPontoOpet/pages/usr/">Principal</a></li>
+				<li><a
+					href="/CartaoPontoOpet/pages/usr/base/listarCartaoPonto.xhtml">Listar
+						Horarios</a></li>
+				<li><a href="/CartaoPontoOpet/pages/usr/base/">Solicitar
+						Alteração</a></li>
+			</ul>
 
-						</div>
-					</div>
-				</h:form>
-			</div>
 
 
 		</div>
@@ -107,82 +109,62 @@ table td {
 
 	<div class="container">
 		<div class="row">
-			<br />
-			<br />
+			<br /> <br />
 
 			<div class="conteudoPrincipal">
+
 				<table>
+
+
 
 					<h:form>
 						<tr>
 							<td>CPF:</td>
 							<td><h:inputText styleClass="cpf myinput" id="cpf"
-									name="cpf" required="true" value="#{fBean.func.cpf}"
+									name="cpf" required="true" value="#{bpBean.bp.nmUsuario}"
 									maxlength="11" /></td>
 						</tr>
 
 						<tr>
-							<td>Nome:</td>
-							<td><h:inputText styleClass="myinput" id="nome"
-									required="true" value="#{fBean.func.nome}" /></td>
-						</tr>
-
-						<tr>
-							<td>Data Nascimento:</td>
-							<td><h:inputText id="data" name="data"
-									styleClass="data myinput" required="true"
-									value="#{fBean.func.dtNasc}">
+							<td>Data:</td>
+							<td><h:inputText styleClass="myinput" id="data"
+									required="true" value="#{bpBean.bp.diaTrabalho}">
 									<f:convertDateTime pattern="dd/MM/yyyy" />
+								</h:inputText></td>
+						</tr>
+						
+						<tr>
+							<td>Observação:</td>
+							<td><h:inputText styleClass="myinput" id="obs"
+									required="true" value="#{bpBean.bp.observacao}">
 								</h:inputText></td>
 						</tr>
 
 						<tr>
-							<td>Telefone:</td>
-							<td><h:inputText styleClass="myinput telefone" id="telefone"
-									required="true" value="#{fBean.func.telefone}" maxlength="9"
-									onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false;" /></td>
-						</tr>
-
-						<tr>
-							<td>Cargo:</td>
+							<td>Periodo:</td>
 							<td><h:selectOneMenu class="myinput"
-									value="#{fBean.func.cargo}" id="cargo">
-									<f:selectItem itemValue="RH" itemLabel="RH" />
-									<f:selectItem itemValue="Administração"
-										itemLabel="Administração" />
-									<f:selectItem itemValue="Contabilidade"
-										itemLabel="Contabilidade" />
-									<f:selectItem itemValue="Estagiário" itemLabel="Estagiário" />
+									value="#{bpBean.bp.horaFazerAlteracao}" id="opcoes">
+									<f:selectItem itemValue="HORA_ENTRADA"
+										itemLabel="Hora de Entrada" />
+									<f:selectItem itemValue="HORA_SAIDA_INTERVALO"
+										itemLabel="Saída Intervalo" />
+									<f:selectItem itemValue="HORA_RETORNO_INTERVALO"
+										itemLabel="Retorno Intervalo" />
+									<f:selectItem itemValue="HORA_SAIDA" itemLabel="Saída" />
 								</h:selectOneMenu></td>
 						</tr>
-
 
 						<tr>
 							<td></td>
 							<td><h:commandButton class="btn btn-primary"
-									action="#{fBean.alterarCadastroFuncionario()}" value="SALVAR" /></td>
+									action="#{bpBean.gravarHoraContestada()}" value="SOLICITAR" /></td>
 						</tr>
-
-
 					</h:form>
-
-
 
 				</table>
 			</div>
 		</div>
 	</div>
 
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	<script
-		src="http://digitalbush.com/wp-content/uploads/2014/10/jquery.maskedinput.js"></script>
-	<script>
-        jQuery(function($){
-           $("input.data").mask("99/99/9999");
-           $("input.cpf").mask("999.999.999-99");
-           $("#ssn").mask("999-99-9999");
-       });
-    </script>
 </body>
 </html>

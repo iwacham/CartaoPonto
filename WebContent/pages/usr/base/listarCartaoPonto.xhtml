@@ -107,11 +107,8 @@ table thead {
 
 	<div class="container">
 		<div class="row">
-			<div class="alert alert-info">
-				<strong>Alerts Dont Work on Bootsnipp!</strong> So when you hit
-				enter or submit this form your result will show up in the green box
-				below!
-			</div>
+			<br />
+			<br />
 
 			<div class="conteudoPrincipal">
 				<p>
@@ -139,6 +136,7 @@ table thead {
 									<td><h:outputText value="#{f.diaTrabalho}">
 											<f:convertDateTime pattern="dd/MM/yyyy" />
 										</h:outputText></td>
+										<h:inputHidden value="#{f.nmUsuario}" />
 									<td><h:outputText value="#{f.horaEntrada}">
 											<f:convertDateTime pattern="HH:MM:SS" />
 										</h:outputText></td>
@@ -154,7 +152,7 @@ table thead {
 										</h:outputText></td>
 
 									<td><h:commandButton styleClass="btn btn-warning"
-											action="/" value="Contestar" /></td>
+											action="#{bpBean.chamarPaginaContestar(f)}" value="Contestar" /></td>
 								</tr>
 							</ui:repeat>
 						</h:form>

@@ -32,7 +32,7 @@
 .conteudoPrincipal {
 	background-color: #FFFFFF;
 	margin: auto;
-	width: 60%;
+	width: 80%;
 	border: 2px solid #fcfcfc;
 	border-radius: 10px;
 	margin-top: 30px;
@@ -58,6 +58,18 @@ table td {
 	font-size: 14px;
 	text-align: right;
 	padding-left: 10px;
+}
+
+table tr {
+	height: 50px;
+	border-bottom: 2px solid #3C3C3C;
+}
+
+table thead {
+	background-color: #F5F5F5;
+	border: 1px solid #F5F5F5;
+	border-radius: 5px;
+	text-align: center;
 }
 </style>
 
@@ -85,19 +97,7 @@ table td {
 				<li><a href="/CartaoPontoOpet/pages/adm/base/cadastrarFuncionario.xhtml">Cadastrar
 						Funcionário</a></li>					
 				</ul>
-			<div class="col-sm-3 col-md-3">
-				<h:form class="navbar-form" role="search">
-					<div class="input-group">
-						<h:inputText value="#{fBean.buscarFuncionario}" class="form-control" placeholder="Buscar Funcionário" name="busca"/>
-						<div class="input-group-btn">
-						<h:commandButton action="#{fBean.chamarPaginaBusca()}" class="btn btn-default" value="Buscar" />
-						
-						
 
-						</div>
-					</div>
-				</h:form>
-			</div>
 
 
 		</div>
@@ -112,77 +112,34 @@ table td {
 
 			<div class="conteudoPrincipal">
 				<table>
-
-					<h:form>
+					<thead>
 						<tr>
-							<td>CPF:</td>
-							<td><h:inputText styleClass="cpf myinput" id="cpf"
-									name="cpf" required="true" value="#{fBean.func.cpf}"
-									maxlength="11" /></td>
+							<td>DIA CONTESTADO</td>
+							<td>CPF</td>
+							<td>PERIODO</td>
+							<td>OBSERVAÇÃO</td>
 						</tr>
 
-						<tr>
-							<td>Nome:</td>
-							<td><h:inputText styleClass="myinput" id="nome"
-									required="true" value="#{fBean.func.nome}" /></td>
-						</tr>
+					</thead>
 
-						<tr>
-							<td>Data Nascimento:</td>
-							<td><h:inputText id="data" name="data"
-									styleClass="data myinput" required="true"
-									value="#{fBean.func.dtNasc}">
-									<f:convertDateTime pattern="dd/MM/yyyy" />
-								</h:inputText></td>
-						</tr>
+					<tbody>
+						<h:form>
+							<ui:repeat var="f" value="#{bpBean.listarHorasContestadas()}">
 
-						<tr>
-							<td>Telefone:</td>
-							<td><h:inputText styleClass="myinput telefone" id="telefone"
-									required="true" value="#{fBean.func.telefone}" maxlength="9"
-									onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false;" /></td>
-						</tr>
+								<tr>
+									<td><h:outputText value="#{f.diaTrabalho}" /></td>
+									<td><h:outputText value="#{f.func.cpf}" /></td>
 
-						<tr>
-							<td>Cargo:</td>
-							<td><h:selectOneMenu class="myinput"
-									value="#{fBean.func.cargo}" id="cargo">
-									<f:selectItem itemValue="RH" itemLabel="RH" />
-									<f:selectItem itemValue="Administração"
-										itemLabel="Administração" />
-									<f:selectItem itemValue="Contabilidade"
-										itemLabel="Contabilidade" />
-									<f:selectItem itemValue="Estagiário" itemLabel="Estagiário" />
-								</h:selectOneMenu></td>
-						</tr>
-
-
-						<tr>
-							<td></td>
-							<td><h:commandButton class="btn btn-primary"
-									action="#{fBean.alterarCadastroFuncionario()}" value="SALVAR" /></td>
-						</tr>
-
-
-					</h:form>
-
-
-
+									<td><h:outputText value="#{f.horaFazerAlteracao}" /></td>
+									<td><h:outputText value="#{f.observacao}" /></td>
+								</tr>
+							</ui:repeat>
+						</h:form>
+					</tbody>
 				</table>
 			</div>
 		</div>
 	</div>
 
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	<script
-		src="http://digitalbush.com/wp-content/uploads/2014/10/jquery.maskedinput.js"></script>
-	<script>
-        jQuery(function($){
-           $("input.data").mask("99/99/9999");
-           $("input.cpf").mask("999.999.999-99");
-           $("#ssn").mask("999-99-9999");
-       });
-    </script>
 </body>
 </html>
