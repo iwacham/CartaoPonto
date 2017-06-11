@@ -25,15 +25,21 @@ import br.opet.projeto.models.Funcionario;
 @ManagedBean(name = "fBean")
 @SessionScoped
 public class FuncionarioBean {
-	private final String admUser = "adm";
-	private final String admSenha = "1234";
+
+	// Implementar sistema de login
+	private static final String ADM_USER = "adm";
+	private static final String ADM_SENHA = "1234";
+
+	private String admUser;
+	private String admSenha;
+
 	private String buscarFuncionario;
 	private Funcionario func = new Funcionario();
 
 	public String verificarAdmin() {
 
 		String resultadoLogin = null;
-		if (this.admUser.equals(getAdmUser()) && this.admSenha.equals(getAdmSenha())) {
+		if (this.admUser.equals(ADM_USER) && this.admSenha.equals(ADM_SENHA)) {
 			resultadoLogin = "listarHorasRegistradas";
 		} else {
 			resultadoLogin = "index";
@@ -41,8 +47,8 @@ public class FuncionarioBean {
 
 		return resultadoLogin;
 	}
-	
-	public String chamarPaginaBusca(){		
+
+	public String chamarPaginaBusca() {
 		return "resultadoBusca";
 	}
 
@@ -181,14 +187,6 @@ public class FuncionarioBean {
 		// Fim do metodo
 	}
 
-	public String getAdmUser() {
-		return admUser;
-	}
-
-	public String getAdmSenha() {
-		return admSenha;
-	}
-
 	public String getBuscarFuncionario() {
 		return buscarFuncionario;
 	}
@@ -225,4 +223,21 @@ public class FuncionarioBean {
 		this.func = new Funcionario();
 		return "listarFuncionarios";
 	}
+
+	public String getAdmUser() {
+		return admUser;
+	}
+
+	public void setAdmUser(String admUser) {
+		this.admUser = admUser;
+	}
+
+	public String getAdmSenha() {
+		return admSenha;
+	}
+
+	public void setAdmSenha(String admSenha) {
+		this.admSenha = admSenha;
+	}
+
 }
