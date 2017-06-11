@@ -60,12 +60,12 @@ table td {
 	padding-left: 10px;
 }
 
-table tr{
+table tr {
 	height: 50px;
 	border-bottom: 2px solid #3C3C3C;
 }
 
-table thead{
+table thead {
 	background-color: #F5F5F5;
 	border: 1px solid #F5F5F5;
 	border-radius: 5px;
@@ -85,7 +85,7 @@ table thead{
 				<span class="sr-only">Toggle navigation</span>
 
 			</button>
-			<a class="navbar-brand" href="#">CartãoPonto</a>
+			<a class="navbar-brand" href="/CartaoPontoOpet/">CartãoPonto</a>
 		</div>
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
@@ -93,12 +93,27 @@ table thead{
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 				<li><a href="/CartaoPontoOpet/pages/adm/index.xhtml">Principal</a></li>
-				<li><a href="/CartaoPontoOpet/pages/adm/base/listarFuncionarios.xhtml">Listar Funcionários</a></li>
-				<li><a href="/CartaoPontoOpet/pages/adm/base/cadastrarFuncionario.xhtml">Cadastrar
+				<li><a
+					href="/CartaoPontoOpet/pages/adm/base/listarFuncionarios.xhtml">Listar
+						Funcionários</a></li>
+				<li><a
+					href="/CartaoPontoOpet/pages/adm/base/cadastrarFuncionario.xhtml">Cadastrar
 						Funcionário</a></li>
 			</ul>
 
+			<div class="col-sm-3 col-md-3">
+				<h:form class="navbar-form" role="search">
+					<div class="input-group">
+						<h:inputText value="#{fBean.buscarFuncionario}" class="form-control" placeholder="Buscar Funcionário" name="busca"/>
+						<div class="input-group-btn">
+						<h:commandButton action="#{fBean.chamarPaginaBusca()}" class="btn btn-default" value="Buscar" />
+						
+						
 
+						</div>
+					</div>
+				</h:form>
+			</div>
 
 		</div>
 		<!-- /.navbar-collapse -->
@@ -107,12 +122,8 @@ table thead{
 
 	<div class="container">
 		<div class="row">
-			<div class="alert alert-info">
-				<strong>Alerts Dont Work on Bootsnipp!</strong> So when you hit
-				enter or submit this form your result will show up in the green box
-				below!
-			</div>
-
+		<br />
+		<br />
 			<div class="conteudoPrincipal">
 				<table>
 					<thead>
@@ -124,28 +135,29 @@ table thead{
 							<td>CARGO</td>
 							<td></td>
 						</tr>
-						
+
 					</thead>
 
 					<tbody>
 						<h:form>
-						<ui:repeat var="f" value="#{fBean.listarFuncionarios()}">
-						
-							<tr>
-								<td><h:outputText value="#{f.nome}" /></td>
-								<td><h:outputText value="#{f.cpf}" /></td>
-								<td><h:outputText value="#{f.dtNasc}">
-										<f:convertDateTime pattern="dd/MM/yyyy" />
-									</h:outputText></td>
+							<ui:repeat var="f" value="#{fBean.listarFuncionarios()}">
 
-								<td><h:outputText value="#{f.telefone}" /></td>
-								<td><h:outputText value="#{f.cargo}" /></td>
+								<tr>
+									<td><h:outputText value="#{f.nome}" /></td>
+									<td><h:outputText value="#{f.cpf}" /></td>
+									<td><h:outputText value="#{f.dtNasc}">
+											<f:convertDateTime pattern="dd/MM/yyyy" />
+										</h:outputText></td>
 
-								<td><h:commandButton styleClass="btn btn-warning"
-										action="#{fBean.chamarPaginaAlteracao(f)}" value="Editar" />||<h:commandButton
-										styleClass="btn btn-danger" action="#{fBean.chamarPaginaExclusao(f)}" value="Excluir" /></td>
-							</tr>
-						</ui:repeat>
+									<td><h:outputText value="#{f.telefone}" /></td>
+									<td><h:outputText value="#{f.cargo}" /></td>
+
+									<td><h:commandButton styleClass="btn btn-warning"
+											action="#{fBean.chamarPaginaAlteracao(f)}" value="Editar" />||<h:commandButton
+											styleClass="btn btn-danger"
+											action="#{fBean.chamarPaginaExclusao(f)}" value="Excluir" /></td>
+								</tr>
+							</ui:repeat>
 						</h:form>
 					</tbody>
 				</table>

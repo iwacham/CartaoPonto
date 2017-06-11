@@ -73,7 +73,7 @@ table td {
 				<span class="sr-only">Toggle navigation</span>
 
 			</button>
-			<a class="navbar-brand" href="#">CartãoPonto</a>
+			<a class="navbar-brand" href="/CartaoPontoOpet/">CartãoPonto</a>
 		</div>
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
@@ -81,11 +81,26 @@ table td {
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 				<li><a href="/CartaoPontoOpet/pages/adm/index.xhtml">Principal</a></li>
-				<li><a href="/CartaoPontoOpet/pages/adm/base/listarFuncionarios.xhtml">Listar Funcionários</a></li>
-				<li><a href="/CartaoPontoOpet/pages/adm/base/cadastrarFuncionario.xhtml">Cadastrar
+				<li><a
+					href="/CartaoPontoOpet/pages/adm/base/listarFuncionarios.xhtml">Listar
+						Funcionários</a></li>
+				<li><a
+					href="/CartaoPontoOpet/pages/adm/base/cadastrarFuncionario.xhtml">Cadastrar
 						Funcionário</a></li>
 			</ul>
+			<div class="col-sm-3 col-md-3">
+				<h:form class="navbar-form" role="search">
+					<div class="input-group">
+						<h:inputText value="#{fBean.buscarFuncionario}" class="form-control" placeholder="Buscar Funcionário" name="busca"/>
+						<div class="input-group-btn">
+						<h:commandButton action="#{fBean.chamarPaginaBusca()}" class="btn btn-default" value="Buscar" />
+						
+						
 
+						</div>
+					</div>
+				</h:form>
+			</div>
 
 
 		</div>
@@ -95,11 +110,8 @@ table td {
 
 	<div class="container">
 		<div class="row">
-			<div class="alert alert-info">
-				<strong>Alerts Dont Work on Bootsnipp!</strong> So when you hit
-				enter or submit this form your result will show up in the green box
-				below!
-			</div>
+			<br />
+			<br />
 
 			<div class="conteudoPrincipal">
 				<table>
@@ -116,9 +128,9 @@ table td {
 						<tr>
 							<td></td>
 							<td><h:commandButton class="btn btn-danger"
-									action="#{fBean.excluirFuncionario()}" value="EXCLUIR" />
-								<h:commandButton class="btn btn-warning"
-									action="#{fBean.limparObjetos()}" value="CANCELAR" /></td>
+									action="#{fBean.excluirFuncionario()}" value="EXCLUIR" /> <h:commandButton
+									class="btn btn-warning" action="#{fBean.limparObjetos()}"
+									value="CANCELAR" /></td>
 						</tr>
 
 

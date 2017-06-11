@@ -19,6 +19,8 @@ public class BaterPonto {
 	private String observacao;
 	private int status;
 
+	private Funcionario func = new Funcionario();
+
 	public String getNmUsuario() {
 		return nmUsuario;
 	}
@@ -113,6 +115,14 @@ public class BaterPonto {
 
 	public void setStatus(int status) {
 		this.status = status;
+	}
+
+	public Funcionario getFunc() {
+		return func;
+	}
+
+	public void setFunc(Funcionario func) {
+		this.func = func;
 	}
 
 }

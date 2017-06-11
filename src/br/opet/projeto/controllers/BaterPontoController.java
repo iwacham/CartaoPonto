@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -22,8 +23,70 @@ public class BaterPontoController implements IAbstractDAO<BaterPonto> {
 
 	@Override
 	public List<BaterPonto> procurarPorChave(String chave) {
-		// TODO Auto-generated method stub
-		return null;
+		// Instancio a classe DbConnect para poder usar seus metodos
+				DbConnect dbconn = new DbConnect();
+				System.out.println("CPF: " + chave);
+				// Inicio uma Connection como nula. para que todo o escopo do metodo
+				// possa usa la.
+				Connection conn = null;
+
+				// Crio uma variavel booleana e inicio a mesma como false
+				// Esta variavel sera modificada durate a execução do metodo e sera
+				// retornada
+				List<BaterPonto> lista = new ArrayList<>();
+				
+				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+
+				// tento iniciar uma conexao e inserir os valores na lista
+				try {
+					conn = dbconn.getConnection();
+					ResultSet rs = dbconn.getResultSet(conn, "SELECT * FROM TBL_TIMECARD WHERE CPF = '" + chave + "'");
+					while (rs.next()) {
+						BaterPonto bp = new BaterPonto();
+
+						bp.getFunc().setCpf(rs.getString("CPF"));
+						
+						System.out.println(sdf.format(rs.getTimestamp("HORA_ENTRADA").getTime()));
+						
+						bp.setHoraEntrada(rs.getTimestamp("HORA_ENTRADA"));
+
+						bp.setHoraSaidaIntervalo(rs.getTimestamp("HORA_SAIDA_INTERVALO"));
+
+						bp.setHoraRetornoIntervalo(rs.getTimestamp("HORA_RETORNO_INTERVALO"));
+
+						bp.setHoraSaida(rs.getTimestamp("HORA_SAIDA"));
+
+						bp.setDiaTrabalho(rs.getString("DATA_PONTO"));
+						
+
+						lista.add(bp);
+
+					}
+
+					/*
+					 * Se algum erro ocorrer durante a execucao do bloco acima ira cair
+					 * no bloco catch que ira imprimir o resultado na console.
+					 */
+				} catch (Exception e) {
+					e.printStackTrace();
+
+				}
+
+				/*
+				 * Por fim verificamos se a conexao esta diferente de nula e se sim
+				 * encerramo a mesma.
+				 */
+				finally {
+					if (conn != null) {
+						try {
+							conn.close();
+						} catch (SQLException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+
+				return lista;
 	}
 
 	

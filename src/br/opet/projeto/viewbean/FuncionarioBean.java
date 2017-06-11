@@ -25,8 +25,33 @@ import br.opet.projeto.models.Funcionario;
 @ManagedBean(name = "fBean")
 @SessionScoped
 public class FuncionarioBean {
-
+	private final String admUser = "adm";
+	private final String admSenha = "1234";
+	private String buscarFuncionario;
 	private Funcionario func = new Funcionario();
+
+	public String verificarAdmin() {
+
+		String resultadoLogin = null;
+		if (this.admUser.equals(getAdmUser()) && this.admSenha.equals(getAdmSenha())) {
+			resultadoLogin = "listarHorasRegistradas";
+		} else {
+			resultadoLogin = "index";
+		}
+
+		return resultadoLogin;
+	}
+	
+	public String chamarPaginaBusca(){		
+		return "resultadoBusca";
+	}
+
+	public List<Funcionario> buscaFuncionario() {
+		FuncionarioController fnc = new FuncionarioController();
+		System.out.println("Busca: " + buscarFuncionario);
+		return fnc.procurarPorChave(buscarFuncionario);
+
+	}
 
 	/**
 	 * Seta o objeto funcionario com o objeto recebido por parametro e chama a
@@ -156,6 +181,22 @@ public class FuncionarioBean {
 		// Fim do metodo
 	}
 
+	public String getAdmUser() {
+		return admUser;
+	}
+
+	public String getAdmSenha() {
+		return admSenha;
+	}
+
+	public String getBuscarFuncionario() {
+		return buscarFuncionario;
+	}
+
+	public void setBuscarFuncionario(String buscarFuncionario) {
+		this.buscarFuncionario = buscarFuncionario;
+	}
+
 	/**
 	 * metodo que retorna o objeto funcionario
 	 * 
@@ -177,9 +218,10 @@ public class FuncionarioBean {
 
 	/**
 	 * Metodo responsável por limpar os valores gravados no objeto
+	 * 
 	 * @return
 	 */
-	public String limparObjetos(){
+	public String limparObjetos() {
 		this.func = new Funcionario();
 		return "listarFuncionarios";
 	}

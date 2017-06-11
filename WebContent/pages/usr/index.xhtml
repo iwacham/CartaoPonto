@@ -74,16 +74,16 @@ table td {
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#">CartãoPonto</a>
+			<a class="navbar-brand" href="/CartaoPontoOpet/">CartãoPonto</a>
 		</div>
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<li><a href="pages/adm/index.xhtml">Principal</a></li>
-				<li><a href="base/listarFuncionarios.xhtml">Listar Horarios</a></li>
-				<li><a href="base/cadastrarFuncionario.xhtml">Solicitar
+				<li><a href="/CartaoPontoOpet/pages/usr/">Principal</a></li>
+				<li><a href="/CartaoPontoOpet/pages/usr/base/listarCartaoPonto.xhtml">Listar Horarios</a></li>
+				<li><a href="/CartaoPontoOpet/pages/usr/base/">Solicitar
 						Alteração</a></li>
 			</ul>
 
@@ -109,12 +109,12 @@ table td {
 					<table>
 						<tr>
 							<td>CPF:</td>
-							<td><h:inputText value="#{bpBean.bp.nmUsuario}" styleClass="myinput" /></td>
+							<td><h:inputText value="#{bpBean.bp.nmUsuario}" styleClass="myinput" maxlength="11" /></td>
 						</tr>
 
 						<tr>
 							<td>Senha:</td>
-							<td><h:inputSecret value="#{bpBean.bp.nmSenha}" styleClass="myinput" /></td>
+							<td><h:inputSecret value="#{bpBean.bp.nmSenha}" styleClass="myinput" maxlength="6" /></td>
 						</tr>
 
 						<tr>

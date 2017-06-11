@@ -1,5 +1,7 @@
 package br.opet.projeto.viewbean;
 
+import java.util.List;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -13,12 +15,39 @@ import br.opet.projeto.models.BaterPonto;
 public class BaterPontoBean {
 
 	private BaterPonto bp = new BaterPonto();
+	
+	/**
+	 * Metodo que busca o cpf no banco e retorna uma lista
+	 * com o ponto completo daquele funcionario
+	 * @return
+	 */
+	public List<BaterPonto> listarPontoFuncionario(){
+		BaterPontoController bpc = new BaterPontoController();
+		for (BaterPonto bp : bpc.procurarPorChave(bp.getNmUsuario())) {
+			System.out.println("DATA: " + bp.getHoraEntrada());
+		}
+		
+		return bpc.procurarPorChave(bp.getNmUsuario());
+	}
 
+	/**
+	 * Metodo responsavel por toda a operacao do funcionario
+	 * executar login e bater o ponto
+	 */
 	public void baterPonto() {
 		// Inicio do metodo
 		System.out.println("User: " + bp.getNmUsuario());
 		BaterPontoController bpc = new BaterPontoController();
 		if (bpc.cadastrarNoBanco(bp)) {
+			
+			if(bp.getAcaoFuncionario().equals("ACESSO_SIMPLES")){
+				try {
+					FacesContext.getCurrentInstance().getExternalContext()
+							.redirect("/CartaoPontoOpet/pages/usr/base/listarCartaoPonto.xhtml");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
 
 			try {
 				FacesContext.getCurrentInstance().getExternalContext()

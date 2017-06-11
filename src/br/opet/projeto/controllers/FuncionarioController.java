@@ -87,11 +87,11 @@ public class FuncionarioController implements IAbstractDAO<Funcionario> {
 		// Esta variavel sera modificada durate a execução do metodo e sera
 		// retornada
 		List<Funcionario> lista = new ArrayList<>();
-
+		System.out.println("Busca C: " + chave);
 		// tento iniciar uma conexao e inserir os valores na lista
 		try {
 			conn = dbconn.getConnection();
-			ResultSet rs = dbconn.getResultSet(conn, "SELECT * FROM TBL_FUNCIONARIO WHERE CPF = " + chave);
+			ResultSet rs = dbconn.getResultSet(conn, "SELECT * FROM TBL_FUNCIONARIO WHERE CPF = '" + chave + "' OR NOME LIKE '%" + chave + "%'");
 			while (rs.next()) {
 
 				Funcionario func = new Funcionario(rs.getString("CPF"),
