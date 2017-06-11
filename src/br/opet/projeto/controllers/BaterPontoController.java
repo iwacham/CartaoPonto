@@ -294,13 +294,13 @@ public class BaterPontoController implements IAbstractDAO<BaterPonto> {
 		DbConnect db = new DbConnect();
 		Connection conn = null;
 		boolean resultado = false;
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		
 		
 		System.out.println("CPF: " + bp.getNmUsuario());
 		System.out.println("OBS: " + bp.getObservacao());
 		System.out.println("TIPO: " + bp.getHoraFazerAlteracao());
-		System.out.println("DATA PONTO: " + sdf.format(bp.getDiaTrabalho()));
-		String data = sdf.format(bp.getDiaTrabalho());
+		System.out.println("DATA PONTO: " + bp.getDiaTrabalho());
+		
 		
 		
 		try{
@@ -311,7 +311,7 @@ public class BaterPontoController implements IAbstractDAO<BaterPonto> {
 			st.setString(2, bp.getObservacao());
 			st.setInt(3, 1);
 			st.setString(4, bp.getNmUsuario());
-			st.setString(5, data);
+			st.setString(5, bp.getDiaTrabalho());
 			
 			if (st.executeUpdate() != 0) {
 				resultado = true;

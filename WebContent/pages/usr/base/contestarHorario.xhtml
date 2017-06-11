@@ -127,10 +127,8 @@ table thead {
 
 						<tr>
 							<td>Data:</td>
-							<td><h:inputText styleClass="myinput" id="data"
-									required="true" value="#{bpBean.bp.diaTrabalho}">
-									<f:convertDateTime pattern="dd/MM/yyyy" />
-								</h:inputText></td>
+							<td><h:inputText styleClass="data myinput" id="data"
+									required="true" value="#{bpBean.bp.diaTrabalho}" /></td>
 						</tr>
 						
 						<tr>
@@ -165,6 +163,16 @@ table thead {
 			</div>
 		</div>
 	</div>
-
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script
+		src="http://digitalbush.com/wp-content/uploads/2014/10/jquery.maskedinput.js"></script>
+	<script>
+        jQuery(function($){
+           $("input.data").mask("99/99/9999");
+           $("input.cpf").mask("999.999.999-99");
+           $("#ssn").mask("999-99-9999");
+       });
+    </script>
 </body>
 </html>
