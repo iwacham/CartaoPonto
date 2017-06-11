@@ -233,7 +233,7 @@ public class BaterPontoController implements IAbstractDAO<BaterPonto> {
 		// tento iniciar uma conexao e inserir os valores na lista
 		try {
 			conn = dbconn.getConnection();
-			ResultSet rs = dbconn.getResultSet(conn, "SELECT * FROM TBL_TIMECARD WHERE OBSERVACAO <> ''");
+			ResultSet rs = dbconn.getResultSet(conn, "SELECT * FROM TBL_TIMECARD WHERE OBSERVACAO IS NOT NULL");
 			while (rs.next()) {
 				BaterPonto bp = new BaterPonto();
 				
@@ -299,15 +299,19 @@ public class BaterPontoController implements IAbstractDAO<BaterPonto> {
 		System.out.println("CPF: " + bp.getNmUsuario());
 		System.out.println("OBS: " + bp.getObservacao());
 		System.out.println("TIPO: " + bp.getHoraFazerAlteracao());
+		System.out.println("DATA PONTO: " + sdf.format(bp.getDiaTrabalho()));
+		String data = sdf.format(bp.getDiaTrabalho());
+		
 		
 		try{
 			conn = db.getConnection();
 			PreparedStatement st = db.getPreparedStatement(conn,
-					"UPDATE TBL_TIMECARD SET HORA_FAZER_ALTERACAO = ?, OBSERVACAO = ?, STATUS = ? WHERE CPF = ?");
+					"UPDATE TBL_TIMECARD SET HORA_FAZER_ALTERACAO = ?, OBSERVACAO = ?, STATUS = ? WHERE CPF = ? AND DATA_PONTO = ?");
 			st.setString(1, bp.getHoraFazerAlteracao());
 			st.setString(2, bp.getObservacao());
 			st.setInt(3, 1);
 			st.setString(4, bp.getNmUsuario());
+			st.setString(5, data);
 			
 			if (st.executeUpdate() != 0) {
 				resultado = true;

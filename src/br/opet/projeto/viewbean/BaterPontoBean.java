@@ -24,6 +24,8 @@ public class BaterPontoBean {
 	
 	public void gravarHoraContestada(){
 		BaterPontoController bpc = new BaterPontoController();
+		
+		System.out.println("DATA BEAN: " + bp.getDiaTrabalho());
 
 		if (bpc.gravarHorasContestadas(bp)) {
 
