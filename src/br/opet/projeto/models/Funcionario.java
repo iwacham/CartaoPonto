@@ -14,7 +14,6 @@ public class Funcionario extends Pessoa {
 
 	// Atributos que serao usados por nossa classe funcionario
 	private String cargo;
-	private String nomeUsuario;
 	private String senhaUsuario;
 
 	/**
@@ -34,10 +33,9 @@ public class Funcionario extends Pessoa {
 	 * @param telefone
 	 * @param cargo
 	 */
-	public Funcionario(String cpf, Date dtNasc, String nome, int telefone, String cargo, String nomeUsuario, String senhaUsuario) {
+	public Funcionario(String cpf, Date dtNasc, String nome, int telefone, String cargo, String senhaUsuario) {
 		super(cpf, dtNasc, nome, telefone);
 		this.cargo = cargo;
-		this.nomeUsuario = nomeUsuario;
 		this.senhaUsuario = senhaUsuario;
 	}
 
@@ -60,25 +58,6 @@ public class Funcionario extends Pessoa {
 		this.cargo = cargo;
 	}
 
-	/**
-	 * Retorna o valor gravado no atributo nomeUsuario (se houver um) se não, retorna
-	 * null.
-	 * 
-	 * @return
-	 */
-	public String getNomeUsuario() {
-		return nomeUsuario;
-	}
-
-	/**
-	 * Recebe um valor por parametro e grava no atributo nomeUsuario.
-	 * 
-	 * @param nomeUsuario
-	 */
-	public void setNomeUsuario(String nomeUsuario) {
-		this.nomeUsuario = nomeUsuario;
-	}
-	
 	/**
 	 * Retorna o valor gravado no atributo senhaUsuario (se houver um) se não, retorna
 	 * null.

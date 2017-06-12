@@ -40,7 +40,7 @@ public class FuncionarioBean {
 
 		String resultadoLogin = null;
 		if (this.admUser.equals(ADM_USER) && this.admSenha.equals(ADM_SENHA)) {
-			resultadoLogin = "listarHorasRegistradas";
+			resultadoLogin = "listarHorasContestadas";
 		} else {
 			resultadoLogin = "index";
 		}

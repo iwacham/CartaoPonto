@@ -43,7 +43,7 @@ public class FuncionarioController implements IAbstractDAO<Funcionario> {
 
 				Funcionario func = new Funcionario(rs.getString("CPF"),
 						new java.util.Date(rs.getDate("DT_NASC").getTime()), rs.getString("NOME"),
-						rs.getInt("TELEFONE"), rs.getString("CARGO"), rs.getString("NOMEUSUARIO"), rs.getString("SENHA"));
+						rs.getInt("TELEFONE"), rs.getString("CARGO"), rs.getString("SENHA"));
 				// getDate("DT_NASC").getDate()
 				lista.add(func);
 			}
@@ -96,7 +96,7 @@ public class FuncionarioController implements IAbstractDAO<Funcionario> {
 
 				Funcionario func = new Funcionario(rs.getString("CPF"),
 						new java.util.Date(rs.getDate("DT_NASC").getTime()), rs.getString("NOME"),
-						rs.getInt("TELEFONE"), rs.getString("CARGO"), rs.getString("NOMEUSUARIO"), rs.getString("SENHA"));
+						rs.getInt("TELEFONE"), rs.getString("CARGO"), rs.getString("SENHA"));
 				// getDate("DT_NASC").getDate()
 				lista.add(func);
 			}
@@ -149,14 +149,13 @@ public class FuncionarioController implements IAbstractDAO<Funcionario> {
 		try {
 			conn = dbconn.getConnection();
 			PreparedStatement pst = dbconn.getPreparedStatement(conn,
-					"INSERT INTO TBL_FUNCIONARIO(CPF, DT_NASC, NOME, TELEFONE, CARGO, NOMEUSUARIO, SENHA) VALUES (?, ?, ?, ?, ?, ?, ?)");
+					"INSERT INTO TBL_FUNCIONARIO(CPF, DT_NASC, NOME, TELEFONE, CARGO, SENHA) VALUES (?, ?, ?, ?, ?, ?)");
 			pst.setString(1, entidade.getCpf().replaceAll("[.-]", ""));
 			pst.setDate(2, new java.sql.Date(entidade.getDtNasc().getTime()));
 			pst.setString(3, entidade.getNome());
 			pst.setInt(4, entidade.getTelefone());
 			pst.setString(5, entidade.getCargo());
-			pst.setString(6, entidade.getNomeUsuario());
-			pst.setString(7, entidade.getSenhaUsuario());
+			pst.setString(6, entidade.getSenhaUsuario());
 
 			/*
 			 * Se o resultado da query for diferente de 0 entao atribuo true a
@@ -224,14 +223,12 @@ public class FuncionarioController implements IAbstractDAO<Funcionario> {
 			pst.setString(2, entidade.getNome());
 			pst.setInt(3, entidade.getTelefone());
 			pst.setString(4, entidade.getCargo());
-			pst.setString(5, entidade.getNomeUsuario());
-			pst.setString(6, entidade.getCpf().replaceAll("[.-]", ""));
+			pst.setString(5, entidade.getCpf().replaceAll("[.-]", ""));
 			
 			System.out.println("DATA: " + entidade.getDtNasc());
 			System.out.println("NOME: " + entidade.getNome());
 			System.out.println("TEL: " + entidade.getTelefone());
 			System.out.println("CARGO: " + entidade.getCargo());
-			System.out.println("USR: " + entidade.getNomeUsuario());
 			System.out.println("CPF: " + entidade.getCpf());
 
 			/*
