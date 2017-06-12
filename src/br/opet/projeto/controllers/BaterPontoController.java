@@ -23,6 +23,9 @@ public class BaterPontoController implements IAbstractDAO<BaterPonto> {
 		return null;
 	}
 
+	/**
+	 * Metodo responsavel por buscar no banco e me retorna uma lista.
+	 */
 	@Override
 	public List<BaterPonto> procurarPorChave(String chave) {
 		// Instancio a classe DbConnect para poder usar seus metodos
@@ -216,6 +219,11 @@ public class BaterPontoController implements IAbstractDAO<BaterPonto> {
 		return false;
 	}
 
+	
+	/**
+	 * Faz a listagem das horas que serao contestadas pelos funcionarios
+	 * @return
+	 */
 	public List<BaterPonto> listarHorasContestadas() {
 		// Instancio a classe DbConnect para poder usar seus metodos
 		DbConnect dbconn = new DbConnect();
@@ -290,6 +298,12 @@ public class BaterPontoController implements IAbstractDAO<BaterPonto> {
 		return lista;
 	}
 	
+	/**
+	 * Metodo responsavel por gravar no banco as horas que os funcionarios
+	 * irao contestar.
+	 * @param bp
+	 * @return
+	 */
 	public boolean gravarHorasContestadas(BaterPonto bp){
 		DbConnect db = new DbConnect();
 		Connection conn = null;

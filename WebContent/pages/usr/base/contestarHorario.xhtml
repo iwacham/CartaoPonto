@@ -120,7 +120,7 @@ table thead {
 					<h:form>
 						<tr>
 							<td>CPF:</td>
-							<td><h:inputText styleClass="cpf myinput" id="cpf"
+							<td><h:inputText styleClass="myinput" id="cpf"
 									name="cpf" required="true" value="#{bpBean.bp.nmUsuario}"
 									maxlength="11" /></td>
 						</tr>
@@ -170,8 +170,6 @@ table thead {
 	<script>
         jQuery(function($){
            $("input.data").mask("99/99/9999");
-           $("input.cpf").mask("999.999.999-99");
-           $("#ssn").mask("999-99-9999");
        });
     </script>
 </body>
