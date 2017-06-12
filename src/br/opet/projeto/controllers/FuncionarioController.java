@@ -218,7 +218,7 @@ public class FuncionarioController implements IAbstractDAO<Funcionario> {
 		try {
 			conn = dbconn.getConnection();
 			PreparedStatement pst = dbconn.getPreparedStatement(conn,
-					"UPDATE TBL_FUNCIONARIO SET DT_NASC = ?, NOME = ?, TELEFONE = ?, CARGO = ?, NOMEUSUARIO = ? WHERE CPF = ?");
+					"UPDATE TBL_FUNCIONARIO SET DT_NASC = ?, NOME = ?, TELEFONE = ?, CARGO = ? WHERE CPF = ?");
 			pst.setTimestamp(1, new java.sql.Timestamp(entidade.getDtNasc().getTime()));
 			pst.setString(2, entidade.getNome());
 			pst.setInt(3, entidade.getTelefone());
