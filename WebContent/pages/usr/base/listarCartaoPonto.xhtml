@@ -138,17 +138,17 @@ table thead {
 										</h:outputText></td>
 										<h:inputHidden value="#{f.nmUsuario}" />
 									<td><h:outputText value="#{f.horaEntrada}">
-											<f:convertDateTime pattern="HH:MM:SS" />
+											<f:convertDateTime pattern="HH:mm:ss" timeZone="GMT-3" />
 										</h:outputText></td>
 									<td><h:outputText value="#{f.horaSaidaIntervalo}">
-											<f:convertDateTime pattern="HH:MM:SS" />
+											<f:convertDateTime pattern="HH:MM:SS" timeZone="GMT-3" />
 										</h:outputText></td>
 
 									<td><h:outputText value="#{f.horaRetornoIntervalo}">
-											<f:convertDateTime pattern="HH:MM:SS" />
+											<f:convertDateTime pattern="HH:MM:SS" timeZone="GMT-3" />
 										</h:outputText></td>
 									<td><h:outputText value="#{f.horaSaida}">
-											<f:convertDateTime pattern="HH:MM:SS" />
+											<f:convertDateTime pattern="HH:MM:SS" timeZone="GMT-3" />
 										</h:outputText></td>
 
 									<td><h:commandButton styleClass="btn btn-warning"
