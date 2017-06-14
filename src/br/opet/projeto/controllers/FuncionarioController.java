@@ -31,12 +31,13 @@ public class FuncionarioController implements IAbstractDAO<Funcionario> {
 		Connection conn = null;
 
 		// Crio uma variavel booleana e inicio a mesma como false
-		// Esta variavel sera modificada durate a execução do metodo e sera
+		// Esta variavel sera modificada durate a execuÃ§Ã£o do metodo e sera
 		// retornada
-		List<Funcionario> lista = new ArrayList<>();
+		List<Funcionario> lista = null;
 
 		// tento iniciar uma conexao e inserir os valores na lista
 		try {
+			lista = new ArrayList<Funcionario>();
 			conn = dbconn.getConnection();
 			ResultSet rs = dbconn.getResultSet(conn, "SELECT * FROM TBL_FUNCIONARIO");
 			while (rs.next()) {
@@ -54,7 +55,7 @@ public class FuncionarioController implements IAbstractDAO<Funcionario> {
 			 */
 		} catch (Exception e) {
 			e.printStackTrace();
-
+			lista = null;
 		}
 
 		/*
@@ -84,12 +85,13 @@ public class FuncionarioController implements IAbstractDAO<Funcionario> {
 		Connection conn = null;
 
 		// Crio uma variavel booleana e inicio a mesma como false
-		// Esta variavel sera modificada durate a execução do metodo e sera
+		// Esta variavel sera modificada durate a execuÃ§Ã£o do metodo e sera
 		// retornada
-		List<Funcionario> lista = new ArrayList<>();
+		List<Funcionario> lista = null;
 		System.out.println("Busca C: " + chave);
 		// tento iniciar uma conexao e inserir os valores na lista
 		try {
+			lista = new ArrayList<Funcionario>();
 			conn = dbconn.getConnection();
 			ResultSet rs = dbconn.getResultSet(conn, "SELECT * FROM TBL_FUNCIONARIO WHERE CPF = '" + chave + "' OR NOME LIKE '%" + chave + "%'");
 			while (rs.next()) {
@@ -107,7 +109,7 @@ public class FuncionarioController implements IAbstractDAO<Funcionario> {
 			 */
 		} catch (Exception e) {
 			e.printStackTrace();
-
+			lista = null;
 		}
 
 		/*
@@ -141,7 +143,7 @@ public class FuncionarioController implements IAbstractDAO<Funcionario> {
 		Connection conn = null;
 
 		// Crio uma variavel booleana e inicio a mesma como false
-		// Esta variavel sera modificada durate a execução do metodo e sera
+		// Esta variavel sera modificada durate a execuÃ§Ã£o do metodo e sera
 		// retornada
 		boolean resultadoAcao = false;
 
@@ -197,7 +199,7 @@ public class FuncionarioController implements IAbstractDAO<Funcionario> {
 	}
 
 	/**
-	 * Metodo recebe um objeto e atualiza o banco com as informações recebidas
+	 * Metodo recebe um objeto e atualiza o banco com as informaÃ§Ãµes recebidas
 	 * por este objeto!
 	 */
 	@Override
@@ -210,7 +212,7 @@ public class FuncionarioController implements IAbstractDAO<Funcionario> {
 		Connection conn = null;
 
 		// Crio uma variavel booleana e inicio a mesma como false
-		// Esta variavel sera modificada durate a execução do metodo e sera
+		// Esta variavel sera modificada durate a execuÃ§Ã£o do metodo e sera
 		// retornada
 		boolean resultadoAcao = false;
 
@@ -280,7 +282,7 @@ public class FuncionarioController implements IAbstractDAO<Funcionario> {
 		Connection conn = null;
 
 		// Crio uma variavel booleana e inicio a mesma como false
-		// Esta variavel sera modificada durate a execução do metodo e sera
+		// Esta variavel sera modificada durate a execuÃ§Ã£o do metodo e sera
 		// retornada
 		boolean resultadoAcao = false;
 
