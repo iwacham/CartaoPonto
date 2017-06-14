@@ -161,6 +161,12 @@ public class BaterPontoBean
         // Fim do metodo
     }
 
+    public void limparObj() {
+        System.out.println("entrou 2");
+        this.bp = null;
+
+    }
+
     public BaterPonto getBp()
     {
         return bp;
@@ -168,7 +174,7 @@ public class BaterPontoBean
 
     public void setBp(BaterPonto bp)
     {
-        this.bp = bp;
+        this.bp = new BaterPonto();
     }
 
     public String saidaSistema()

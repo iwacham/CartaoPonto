@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.sun.javafx.cursor.StandardCursorFrame;
-
 import br.opet.projeto.dao.IAbstractDAO;
 import br.opet.projeto.models.BaterPonto;
 import br.opet.projeto.util.DbConnect;
@@ -108,10 +106,10 @@ public class BaterPontoController implements IAbstractDAO<BaterPonto> {
 		Date dt = new Date();
 		try {
 			conn = db.getConnection();
-			System.out.println("NOME: " + entidade.getNmUsuario());
+			System.out.println("NOME: " + entidade.getNmUsuario().replaceAll("[.-]", ""));
 			System.out.println("NOME: " + entidade.getNmSenha());
 			ResultSet rs = db.getResultSet(conn, "SELECT CPF, SENHA FROM TBL_FUNCIONARIO WHERE CPF = '"
-					+ entidade.getNmUsuario() + "' AND SENHA = '" + entidade.getNmSenha() + "'");
+					+ entidade.getNmUsuario().replaceAll("[.-]", "") + "' AND SENHA = '" + entidade.getNmSenha() + "'");
 			if (rs.next()) {
 				System.out.println("ACAO: " + entidade.getAcaoFuncionario());
 
@@ -120,7 +118,7 @@ public class BaterPontoController implements IAbstractDAO<BaterPonto> {
 
 					PreparedStatement st = db.getPreparedStatement(conn,
 							"INSERT INTO TBL_TIMECARD (CPF, DATA_PONTO, HORA_ENTRADA, STATUS) VALUES (?, ?, ?, ?)");
-					st.setString(1, entidade.getNmUsuario());
+					st.setString(1, entidade.getNmUsuario().replaceAll("[.-]", ""));
 					st.setString(2, sdf.format(dt));
 					st.setTimestamp(3, new java.sql.Timestamp(dt.getTime()));
 					st.setInt(4, 0);
@@ -136,7 +134,7 @@ public class BaterPontoController implements IAbstractDAO<BaterPonto> {
 					st = db.getPreparedStatement(conn,
 							"UPDATE TBL_TIMECARD SET HORA_SAIDA_INTERVALO = ? WHERE CPF = ? AND DATA_PONTO = ?");
 					st.setTimestamp(1, new java.sql.Timestamp(dt.getTime()));
-					st.setString(2, entidade.getNmUsuario());
+					st.setString(2, entidade.getNmUsuario().replaceAll("[.-]", ""));
 					st.setString(3, sdf.format(dt));
 
 					if (st.executeUpdate() != 0) {
@@ -151,7 +149,7 @@ public class BaterPontoController implements IAbstractDAO<BaterPonto> {
 					st = db.getPreparedStatement(conn,
 							"UPDATE TBL_TIMECARD SET HORA_RETORNO_INTERVALO = ? WHERE CPF = ? AND DATA_PONTO = ?");
 					st.setTimestamp(1, new java.sql.Timestamp(dt.getTime()));
-					st.setString(2, entidade.getNmUsuario());
+					st.setString(2, entidade.getNmUsuario().replaceAll("[.-]", ""));
 					st.setString(3, sdf.format(dt));
 
 					if (st.executeUpdate() != 0) {
@@ -166,7 +164,7 @@ public class BaterPontoController implements IAbstractDAO<BaterPonto> {
 					st = db.getPreparedStatement(conn,
 							"UPDATE TBL_TIMECARD SET HORA_SAIDA = ? WHERE CPF = ? AND DATA_PONTO = ?");
 					st.setTimestamp(1, new java.sql.Timestamp(dt.getTime()));
-					st.setString(2, entidade.getNmUsuario());
+					st.setString(2, entidade.getNmUsuario().replaceAll("[.-]", ""));
 					st.setString(3, sdf.format(dt));
 
 					if (st.executeUpdate() != 0) {
@@ -223,7 +221,7 @@ public class BaterPontoController implements IAbstractDAO<BaterPonto> {
 		return false;
 	}
 
-	
+
 	/**
 	 * Faz a listagem das horas que serao contestadas pelos funcionarios
 	 * @return
@@ -249,7 +247,7 @@ public class BaterPontoController implements IAbstractDAO<BaterPonto> {
 			ResultSet rs = dbconn.getResultSet(conn, "SELECT * FROM TBL_TIMECARD WHERE OBSERVACAO IS NOT NULL");
 			while (rs.next()) {
 				BaterPonto bp = new BaterPonto();
-				
+
 				bp.setNmUsuario(rs.getString("CPF"));
 
 				System.out.println(sdf.format(rs.getTimestamp("HORA_ENTRADA").getTime()));
@@ -265,11 +263,11 @@ public class BaterPontoController implements IAbstractDAO<BaterPonto> {
 				bp.setDiaTrabalho(rs.getString("DATA_PONTO"));
 
 				bp.setHoraFazerAlteracao(rs.getString("HORA_FAZER_ALTERACAO"));
-				
+
 				bp.setDataFazerAlteracao(rs.getString("DATA_PONTO"));
-				
+
 				bp.setObservacao(rs.getString("OBSERVACAO"));
-				
+
 				bp.setStatus(rs.getInt("STATUS"));
 
 
@@ -302,7 +300,7 @@ public class BaterPontoController implements IAbstractDAO<BaterPonto> {
 
 		return lista;
 	}
-	
+
 	/**
 	 * Metodo responsavel por gravar no banco as horas que os funcionarios
 	 * irao contestar.
@@ -312,32 +310,33 @@ public class BaterPontoController implements IAbstractDAO<BaterPonto> {
 	public boolean gravarHorasContestadas(BaterPonto bp){
 		DbConnect db = new DbConnect();
 		Connection conn = null;
+		PreparedStatement st = null;
 		boolean resultado = false;
-		
-		
+
+
 		System.out.println("CPF: " + bp.getNmUsuario());
 		System.out.println("OBS: " + bp.getObservacao());
 		System.out.println("TIPO: " + bp.getHoraFazerAlteracao());
 		System.out.println("DATA PONTO: " + bp.getDiaTrabalho());
-		
-		
-		
+
+
+
 		try{
 			conn = db.getConnection();
-			PreparedStatement st = db.getPreparedStatement(conn,
+			st = db.getPreparedStatement(conn,
 					"UPDATE TBL_TIMECARD SET HORA_FAZER_ALTERACAO = ?, OBSERVACAO = ?, STATUS = ? WHERE CPF = ? AND DATA_PONTO = ?");
 			st.setString(1, bp.getHoraFazerAlteracao());
 			st.setString(2, bp.getObservacao());
 			st.setInt(3, 1);
-			st.setString(4, bp.getNmUsuario());
+			st.setString(4, bp.getNmUsuario().replaceAll("[.-]", ""));
 			st.setString(5, bp.getDiaTrabalho());
-			
+
 			if (st.executeUpdate() != 0) {
 				resultado = true;
 			} else {
 				resultado = false;
 			}
-			
+
 		}catch (Exception e) {
 			e.printStackTrace();
 			resultado = false;
@@ -345,12 +344,13 @@ public class BaterPontoController implements IAbstractDAO<BaterPonto> {
 			if(conn != null){
 				try {
 					conn.close();
+					st.close();
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
 			}
 		}
-		
+
 		return resultado;
 	}
 

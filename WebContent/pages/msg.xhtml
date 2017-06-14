@@ -86,7 +86,9 @@
 		</div>
 	</c:if>
 	<div class="centroDiv">
-		<a href="/CartaoPontoOpet/index.xhtml" class="btn btn-primary">VOLTAR</a>
+	<h:form>
+		<h:commandButton class="btn btn-primary" action="#{fBean.saidaSistema()}" value="VOLTAR" />
+	</h:form>
 	</div>
 </body>
 </html>

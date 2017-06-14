@@ -107,7 +107,7 @@ table td {
 					<table>
 						<tr>
 							<td>CPF:</td>
-							<td><h:inputText value="#{bpBean.bp.nmUsuario}" styleClass="myinput" maxlength="11" /></td>
+							<td><h:inputText value="#{bpBean.bp.nmUsuario}" styleClass="cpf myinput" maxlength="11" /></td>
 						</tr>
 
 						<tr>
@@ -137,6 +137,14 @@ table td {
 
 		</div>
 	</div>
-
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script
+		src="http://digitalbush.com/wp-content/uploads/2014/10/jquery.maskedinput.js"></script>
+	<script>
+        jQuery(function($){
+           $("input.cpf").mask("999.999.999-99");
+       });
+    </script>
 </body>
 </html>

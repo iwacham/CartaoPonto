@@ -14,6 +14,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import br.opet.projeto.controllers.FuncionarioController;
+import br.opet.projeto.models.BaterPonto;
 import br.opet.projeto.models.Funcionario;
 
 /**
@@ -35,6 +36,7 @@ public class FuncionarioBean {
 
 	private String buscarFuncionario;
 	private Funcionario func = new Funcionario();
+	private BaterPontoBean bpb = new BaterPontoBean();
 
 	public String verificarAdmin() {
 
@@ -42,7 +44,13 @@ public class FuncionarioBean {
 		if (this.admUser.equals(ADM_USER) && this.admSenha.equals(ADM_SENHA)) {
 			resultadoLogin = "listarHorasContestadas";
 		} else {
-			resultadoLogin = "index";
+		    try {
+                FacesContext.getCurrentInstance().getExternalContext()
+                        .redirect("/CartaoPontoOpet/pages/msg.xhtml?msg=Nome ou senha inválidos!&status=BAD");
+            } catch (Exception e) {
+                e.printStackTrace();
+                saidaSistema();
+            }
 		}
 
 		return resultadoLogin;
@@ -261,6 +269,18 @@ public class FuncionarioBean {
 	}
 
 	public String saidaSistema() {
+
+	    Funcionario f = new Funcionario();
+	    admUser = "";
+	    admSenha = "";
+
+	    BaterPonto b = new BaterPonto();
+	    b.setNmUsuario("");
+	    b.setNmSenha("");
+
+
+
+
 	    return "/index";
 	}
 
