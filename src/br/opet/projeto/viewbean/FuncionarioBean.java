@@ -2,7 +2,7 @@
  * Autor: Tiago Henrique Iwamoto
  * Email: tiago.iwamoto@opet.edu.br
  * Bean responsável pela comunicação entre a VIEW e a CONTROLLER
- * 
+ *
  */
 
 package br.opet.projeto.viewbean;
@@ -18,7 +18,7 @@ import br.opet.projeto.models.Funcionario;
 
 /**
  * Crio o mapeamento usando o @ManagedBean
- * 
+ *
  * @author Tiago Iwamoto
  *
  */
@@ -55,6 +55,16 @@ public class FuncionarioBean {
 	public List<Funcionario> buscaFuncionario() {
 		FuncionarioController fnc = new FuncionarioController();
 		System.out.println("Busca: " + buscarFuncionario);
+
+		if(fnc.procurarPorChave(buscarFuncionario).isEmpty() || fnc.procurarPorChave(buscarFuncionario) == null) {
+            try {
+                FacesContext.getCurrentInstance().getExternalContext()
+                        .redirect("/CartaoPontoOpet/pages/msg.xhtml?msg=Nenhum registro foi encontrado !!&status=BAD");
+            } catch (Exception e) {
+                e.printStackTrace();
+                saidaSistema();
+            }
+		}
 		return fnc.procurarPorChave(buscarFuncionario);
 
 	}
@@ -62,7 +72,7 @@ public class FuncionarioBean {
 	/**
 	 * Seta o objeto funcionario com o objeto recebido por parametro e chama a
 	 * pagina que fara a exclusão do funcionário
-	 * 
+	 *
 	 * @param f
 	 * @return
 	 */
@@ -105,7 +115,7 @@ public class FuncionarioBean {
 	/**
 	 * Seta o objeto funcionario com o objeto recebido por parametro e chama a
 	 * pagina que fara a alteração do funcionário
-	 * 
+	 *
 	 * @param f
 	 * @return
 	 */
@@ -147,11 +157,21 @@ public class FuncionarioBean {
 	/**
 	 * Metodo que ira buscar na controller todos os funcionarios cadastrados
 	 * grava em uma lista e retorna para a view
-	 * 
+	 *
 	 * @return
 	 */
 	public List<Funcionario> listarFuncionarios() {
 		FuncionarioController fnc = new FuncionarioController();
+
+		if(fnc.listarTodos().isEmpty() || fnc.listarTodos() == null) {
+		    try {
+                FacesContext.getCurrentInstance().getExternalContext()
+                        .redirect("/CartaoPontoOpet/pages/msg.xhtml?msg=Nenhum registro foi encontrado !!&status=BAD");
+            } catch (Exception e) {
+                e.printStackTrace();
+                saidaSistema();
+            }
+		}
 
 		return fnc.listarTodos();
 	}
@@ -197,7 +217,7 @@ public class FuncionarioBean {
 
 	/**
 	 * metodo que retorna o objeto funcionario
-	 * 
+	 *
 	 * @return
 	 */
 	public Funcionario getFunc() {
@@ -207,7 +227,7 @@ public class FuncionarioBean {
 	/**
 	 * Recebo um objeto de funcionario instancio um novo funcionario e gravo o
 	 * valor do objeto recebido no funcionario.
-	 * 
+	 *
 	 * @param f
 	 */
 	public void setFunc(Funcionario f) {
@@ -216,7 +236,7 @@ public class FuncionarioBean {
 
 	/**
 	 * Metodo responsável por limpar os valores gravados no objeto
-	 * 
+	 *
 	 * @return
 	 */
 	public String limparObjetos() {
@@ -238,6 +258,10 @@ public class FuncionarioBean {
 
 	public void setAdmSenha(String admSenha) {
 		this.admSenha = admSenha;
+	}
+
+	public String saidaSistema() {
+	    return "/index";
 	}
 
 }
