@@ -36,14 +36,15 @@ public class BaterPontoController implements IAbstractDAO<BaterPonto> {
 		Connection conn = null;
 
 		// Crio uma variavel booleana e inicio a mesma como false
-		// Esta variavel sera modificada durate a execução do metodo e sera
+		// Esta variavel sera modificada durate a execuÃ§Ã£o do metodo e sera
 		// retornada
-		List<BaterPonto> lista = new ArrayList<>();
+		List<BaterPonto> lista = null;
 
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
 		// tento iniciar uma conexao e inserir os valores na lista
 		try {
+			lista = new ArrayList<BaterPonto>();
 			conn = dbconn.getConnection();
 			ResultSet rs = dbconn.getResultSet(conn, "SELECT * FROM TBL_TIMECARD WHERE CPF = '" + chave + "'");
 			while (rs.next()) {
@@ -73,7 +74,7 @@ public class BaterPontoController implements IAbstractDAO<BaterPonto> {
 			 */
 		} catch (Exception e) {
 			e.printStackTrace();
-
+			lista = null;
 		}
 
 		/*
@@ -94,8 +95,8 @@ public class BaterPontoController implements IAbstractDAO<BaterPonto> {
 	}
 
 	/**
-	 * Metodo que insere no banco de dados verifica se as informações de login
-	 * estão corretas e se estiverem cai em um switch para verificar qual a ação
+	 * Metodo que insere no banco de dados verifica se as informaÃ§Ãµes de login
+	 * estÃ£o corretas e se estiverem cai em um switch para verificar qual a aÃ§Ã£o
 	 * desejada
 	 */
 	@Override
@@ -189,10 +190,13 @@ public class BaterPontoController implements IAbstractDAO<BaterPonto> {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			resultado = false;
 		} catch (InstantiationException e) {
 			e.printStackTrace();
+			resultado = false;
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();
+			resultado = false;
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} finally {
@@ -232,14 +236,15 @@ public class BaterPontoController implements IAbstractDAO<BaterPonto> {
 		Connection conn = null;
 
 		// Crio uma variavel booleana e inicio a mesma como false
-		// Esta variavel sera modificada durate a execução do metodo e sera
+		// Esta variavel sera modificada durate a execuÃ§Ã£o do metodo e sera
 		// retornada
-		List<BaterPonto> lista = new ArrayList<>();
+		List<BaterPonto> lista = null;
 
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
 		// tento iniciar uma conexao e inserir os valores na lista
 		try {
+			lista = new ArrayList<BaterPonto>();
 			conn = dbconn.getConnection();
 			ResultSet rs = dbconn.getResultSet(conn, "SELECT * FROM TBL_TIMECARD WHERE OBSERVACAO IS NOT NULL");
 			while (rs.next()) {
@@ -278,7 +283,7 @@ public class BaterPontoController implements IAbstractDAO<BaterPonto> {
 			 */
 		} catch (Exception e) {
 			e.printStackTrace();
-
+			lista = null;
 		}
 
 		/*
@@ -335,6 +340,7 @@ public class BaterPontoController implements IAbstractDAO<BaterPonto> {
 			
 		}catch (Exception e) {
 			e.printStackTrace();
+			resultado = false;
 		}finally{
 			if(conn != null){
 				try {
